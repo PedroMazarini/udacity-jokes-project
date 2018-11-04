@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getContext;
 import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by Pedro Mazarini on 03/Nov/2018.
@@ -36,6 +38,7 @@ public class LoadingJokesTest  {
             e.printStackTrace();
         }
         assertNotNull(result);
+        assertFalse(result.isEmpty());
     }
 
 
