@@ -1,18 +1,19 @@
 package br.com.jokes.builditbigger;
 
 
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.udacity.gradle.builditbigger.EndpointAsynctask;
+import com.udacity.gradle.builditbigger.MainActivity;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
-import static android.support.test.InstrumentationRegistry.getContext;
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -21,24 +22,23 @@ import static org.junit.Assert.assertFalse;
 @RunWith(AndroidJUnit4.class)
 public class LoadingJokesTest  {
 
+    @Rule
+    public ActivityTestRule<MainActivity> activityActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @SuppressWarnings("unchecked")
     @Test
     public void test() {
-
-        // Testing that Async task successfully retrieves a non-empty string
-        // You can test this from androidTest -> Run 'All Tests'
         Log.v("NonEmptyStringTest", "Running NonEmptyStringTest test");
         String result = null;
         EndpointAsynctask endpointsAsyncTask = new EndpointAsynctask();
-        endpointsAsyncTask.execute(getContext());
+        endpointsAsyncTask.execute(activityActivityTestRule.getActivity());
         try {
             result = endpointsAsyncTask.get();
         } catch (Exception e) {
             e.printStackTrace();
         }
         assertNotNull(result);
-        assertFalse(result.isEmpty());
+        assertFalse(result != "");
     }
 
 
